@@ -16,13 +16,7 @@ data <- read.csv('choc_chip_cookie_ingredients.csv')
 
 column_types <- sapply(data, class)
 
-column_types #Unit is not numeric like in ReadMe, however the values within the column some need to be text, so convert to factor to account for that
-
-data$Unit <- as.factor(data$Unit) #convert Unit to factor
-
-column_types_fixed <- sapply(data, class)
-
-column_types_fixed
+column_types #Unit is not numeric like in ReadMe, but said in class it is fine
 
 ```
 
