@@ -2,7 +2,7 @@
 title: "Chocolate Chip Cookies"
 execute:
   error: true
-author: "Your Name"
+author: "Luke Nieland"
 output: html_document
 ---
 
@@ -12,6 +12,17 @@ First, read in the CSV data of cookie ingredients.
 Make sure that your end-result data has appropriate types for each column - these should match the types provided in the documentation in the README.md file.
 
 ```{r}
+data <- read.csv('choc_chip_cookie_ingredients.csv')
+
+column_types <- sapply(data, class)
+
+column_types #Unit is not numeric like in ReadMe, however the values within the column some need to be text, so convert to factor to account for that
+
+data$Unit <- as.factor(data$Unit) #convert Unit to factor
+
+column_types_fixed <- sapply(data, class)
+
+column_types_fixed
 
 ```
 
@@ -34,11 +45,11 @@ Exploratory data analysis is the process of getting familiar with your dataset. 
 
 Generate at least 5 questions you might explore using this database of cookie ingredients.
 
-1.
-2. 
-3. 
-4. 
-5. 
+1. Are there any missing or NA rows/columns/data points? Do they need to be deleted or have data imputed?
+2. What ingredients are used in the most and least recipes?
+3. What is the average amount of cookies made by a recipe?
+4. How many recipes of each rating do we have?
+5. Are there any outliers? Does it effect rating.
 
 
 ### Skimming the Data
@@ -53,6 +64,11 @@ Install both packages, and read the package documentation ([R](https://cran.r-pr
 
 
 ```{r}
+library(skimr)
+
+my_skim <- skim_with(numeric = sfl(hist = NULL, iqr = ~ IQR(., na.rm = TRUE), p25 = NULL, p75 = NULL)) #removed historgram and p25, p75 and added IQR
+
+my_skim(data)
 
 ```
 
@@ -61,6 +77,8 @@ Install both packages, and read the package documentation ([R](https://cran.r-pr
 ```
 
 [Part 2] Write 1-2 sentences about what you can tell from each summary display you generate. Did you discover anything new about the data?
+
+The character data type columns are fully complete without any nulls, however the rating column in the numeric columns is only about 49% complete. As well, the IQR for quantity is the largest, meaning many of these recipes produce differing amounts of cookies.
 
 ### Generating Tables
 
