@@ -96,6 +96,7 @@ top20_props <- data %>% #this pipe thing I learned about while looking up stuff 
   distinct(Recipe_Index, Ingredient) %>% #each unique ingredient pair
   count(Ingredient, name = "n_recipes") %>% #how many recipes each ingredient is in
   mutate(proportion = n_recipes / total_recipes) %>% #proportion of number of recipes in to total recipes
+  arrange(desc(proportion)) %>%
   slice_head(n = 20) #get top 20
 
 top20_props
