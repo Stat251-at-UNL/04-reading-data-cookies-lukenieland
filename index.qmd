@@ -97,7 +97,7 @@ top20_props <- data %>% #this pipe thing I learned about while looking up stuff 
   count(Ingredient, name = "n_recipes") %>% #how many recipes each ingredient is in
   mutate(proportion = n_recipes / total_recipes) %>% #proportion of number of recipes in to total recipes
   arrange(desc(proportion)) %>%
-  slice_head(n = 20) #get top 20
+  slice_head(n = 22) #get top 20 (22 to account for ties in last place)
 
 top20_props
 ```
@@ -125,5 +125,17 @@ paste(not_top20_props, collapse = " ") #prints character string
 Using whatever plotting system you are comfortable with in R or python, see if you can create a couple of useful exploratory data visualizations which address one of the questions you wrote above - or another question which you've come up with as you've worked on this assignment.
 
 [Part 1] Create at least one plot (it doesn't have to be pretty) that showcases an interesting facet of the data.
+```{r}
+ingred <- table(data$Ingredient)
+
+barplot(ingred,
+        main = 'Bar Chart of Ingredient Counts',
+        xlab = 'Ingredient',
+        ylab = '# times Used')
+
+```
+
 
 [Part 2] Write 2-3 sentences about what you can learn from that plot and what directions you might want to investigate from here.
+
+From the plot, I can answer my question about which ingredients are used the most. While we answered this earlier, getting a visual helps me understand how the most common ingredients are used much more frequently than the lesser used ingredients. A further investigation could be the lowest ingredients used and visualize those to compare the more "frequent" infrequent ingredients and the truly rarely used ingredients.
