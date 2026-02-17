@@ -21,7 +21,6 @@ column_types #Unit is not numeric like in ReadMe, but said in class it is fine
 ```
 
 ```{python}
-
 ```
 
 
@@ -108,7 +107,7 @@ not_top20_props <- data %>% #this pipe thing I learned about while looking up st
   filter(n_recipes < 20) %>% #gets ingredients in less than 20 recipes
   pull(Ingredient) #pulls out the names of those ingredients.
 
-paste(not_top20_props, collapse = " ") #prints character string
+paste(not_top20_props, collapse = ", ") #prints character string
 ```
 
 
